@@ -1,0 +1,57 @@
+<div class="row container-fluid" id="contenedorSeries">
+  <div class="col-7">
+    <table class="table table-hover" style="margin-left: 20px">
+      <caption class="text-start">Promedio de temporadas: {{ averageSeasons }} </caption>
+      <thead>
+        <tr>
+          <th class="h4">#</th>
+          <th class="h4">Name</th>
+          <th class="h4">Channel</th>
+          <th class="h4">Seasons</th>
+        </tr>
+      </thead>
+      <tbody id="seriesTable">
+        <tr
+          *ngFor="let c of series; trackBy: trackById"
+          (click)="selectSeries(c)"
+          [class.table-active]="selectedSeries?.id === c.id"
+          style="cursor: pointer;"
+        >
+          <td>
+            <dd>{{ c.id }}</dd>
+          </td>
+          <td style="color:blue">
+            <dd>{{ c.name }}</dd>
+          </td>
+          <td>
+            <dd>{{ c.channel }}</dd>
+          </td>
+          <td>
+            <dd>{{ c.seasons }}</dd>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-5">
+    <div *ngIf="selectedSeries" class="card p-2">
+      <img
+        class="card-img-top"
+        [src]="selectedSeries.poster"
+        [alt]="selectedSeries.name"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ selectedSeries.name }}</h5>
+        <p class="card-text">{{ selectedSeries.description }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!selectedSeries" class="card p-2">
+      <div class="card-body">
+        <h5 class="card-title">Seleccione una serie</h5>
+        <p class="card-text">Haga clic en una fila a la izquierda para ver la descripción y el póster.</p>
+      </div>
+    </div>
+  </div>
+</div>
